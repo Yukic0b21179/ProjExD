@@ -24,4 +24,4 @@ while True:
     else:
         print("ちげーよばーか")
 
-print("")
+print("congratulations")
