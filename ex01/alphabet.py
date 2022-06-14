@@ -1,6 +1,9 @@
 import random
 
-list = ["A","C","J","K","P","R","S","T","U","Y"]
+listAll = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+list = []
+for i in range(10):
+    list.append(random.choice(listAll))
 list2 = ["",""]
 list3 = ["",""]
 
