@@ -4,8 +4,8 @@ listAll = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","
 list = []
 for i in range(10):
     list.append(random.choice(listAll))
-list2 = ["",""]
-list3 = ["",""]
+list2 = ["",""] #今回二文字のためその二文字を保管するためのList
+list3 = ["",""] #同上、時間があればここもランダムにするつもりだったが今回は二文字という指定もあったため断念。
 
 print("対象文字：")
 print(*list)
