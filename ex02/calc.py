@@ -8,8 +8,11 @@ def button_click(event):
     if num == "=":
         eqn = entry.get()
         result = eval(eqn)
-        entry.delete(0, tk.END)
-        entry.insert(tk.END,result)
+        entry.delete(0, tk.END) 
+        if result/int(result)==1:
+            entry.insert(tk.END,int(result))
+        else:
+            entry.insert(tk.END,result)
     else:
         entry.insert(tk.END,num)
 
@@ -26,9 +29,18 @@ if __name__ == "__main__":
 
 r, c = 1, 0 #r:行番号　c:列番号
 
-list = [9,8,7,6,5,4,3,2,1,0,"+","="]
+list = [9,8,7,6,5,4,3,2,1,0,"+","=","-","*","/"]
 
 for num in list:
+
+    if isinstance(num, int):
+        if (num-3) % 3 == 0:
+            r += 1
+            c = 0
+    elif num == "+":
+        r += 1
+        c = 0
+
     btn = tk.Button(root,
                     text = f"{num}",
                     width = 4,
@@ -40,9 +52,6 @@ for num in list:
 
     c += 1
 
-    if isinstance(num, int):
-        if (num-1)%3 == 0:
-            r += 1
-            c = 0
+    
 
 root.mainloop()
