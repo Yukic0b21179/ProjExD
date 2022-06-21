@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.messagebox as tkm
 from winreg import REG_RESOURCE_REQUIREMENTS_LIST
 
-def button_click(event):    #ボタンが押された時の処理
+def button_click(event):    #ボタンが押された時の処理←二個目
     btn = event.widget
     num = btn["text"]
     if num == "=":
