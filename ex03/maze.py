@@ -79,8 +79,6 @@ if __name__ == "__main__":
 
     jid = 0
 
-    # label = tk.Label(root, text="制限時間", font = ("Times New Roman", 80))
-    # label.pack()
     tmr = 100
     count_down()
 
