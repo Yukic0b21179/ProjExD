@@ -1,3 +1,4 @@
+from tokenize import maybe
 import maze_maker
 import tkinter as tk
 
@@ -10,23 +11,33 @@ def key_up(event):
     key = ""
 
 def main_proc():
-    global cx,cy,key
+    global cx,cy,key,mx,my
 
     if key != "":
 
         delta = {   #キー：押されているキーkye/値：移動幅リスト[x,y]
-            "Up"    : [0, -20],
-            "Down"  : [0, +20],
-            "Left"  : [-20, 0],
-            "Right" : [+20, 0],
+            "Up"    : [0, -1],
+            "Down"  : [0, +1],
+            "Left"  : [-1, 0],
+            "Right" : [+1, 0],
         }
-    
-        cx, cy = cx + delta[key][0], cy + delta[key][1]
-        canvas.coords("tori", cx, cy)
 
+        mx, my = mx + delta[key][0], my + delta[key][1]
+    
+        if list[my][mx] == 0:
+
+            cx, cy = mx*100 + 50, my*100 +50
+
+            canvas.coords("tori", cx, cy)
+
+        else:
+            mx, my = mx - delta[key][0], my - delta[key][1]
+            
     root.after(100, main_proc)
 
 if __name__ == "__main__":
+
+    mx, my = 1, 1
 
     root = tk.Tk()
     root.title("迷えるこうかとん")
@@ -39,7 +50,7 @@ if __name__ == "__main__":
 
     tori = tk.PhotoImage(file = "fig/6.png")
 
-    cx, cy = 300,400
+    cx, cy = mx * 100 + 50,my * 100 + 50
     canvas.create_image(cx, cy, image = tori, tag = "tori")
 
     key = ""
@@ -49,7 +60,5 @@ if __name__ == "__main__":
     main_proc()
 
     jid = 0
-
-    
 
     root.mainloop()
