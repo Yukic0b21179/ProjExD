@@ -23,7 +23,7 @@ def main():
 
     bomb = pg.Surface((20,20))
     bomb.set_colorkey((0,0,0))
-    pg.draw.circle(bomb, (255, 0, 0), (10,10), 10)
+    pg.draw.circle(bomb, (0, 102, 204), (10,10), 10)
     bomb_rct = bomb.get_rect()                #Rect
     bomb_rct.centerx = random.randint(0, screen_rct.width)
     bomb_rct.centery = random.randint(0, screen_rct.height)
