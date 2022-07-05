@@ -99,7 +99,7 @@ def exit():
 def Main():     #鳥のカウントとゲームオーバー画面の非表示
     global root,cnt
     cnt += 1
-    if cnt == 10:
+    if cnt == 9:
         cnt = 0
     root.destroy()
     main()
