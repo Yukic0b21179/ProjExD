@@ -74,6 +74,26 @@ class Bomb:
         self.blit(scr)
 
 
+class Shot:
+
+    def __init__(self, chr: Bird):
+        self.sfc = pg.image.load("fig/beam.png")            # Surface
+        self.sfc = pg.transform.rotozoom(self.sfc, 0, 0.1)  # Surface
+        self.rct = self.sfc.get_rect()
+        self.rct.midleft = chr.rct.center
+
+    def blit(self, scr: Screen):
+        scr.sfc.blit(self.sfc, self.rct)
+
+    def update(self, scr: Screen):
+
+        self.rct.move_ip(+10, 0)                     #右方向に速度１で移動する
+        if check_bound(self.rct, scr.rct) != (1,1):  #領域外に出たら、インスタンスを消す     
+            del self
+        else:
+            self.blit(scr)
+
+
 def main():
     clock = pg.time.Clock()
 
@@ -83,16 +103,26 @@ def main():
 
     bkb = Bomb((255,0,0), 10, (+1,+1), scr)
 
+    # beem = Shot(kkt)
+    beem = None
+
     while True:
 
-        scr.blit()
+        scr.blit() 
 
         for event in pg.event.get():
-            if event.type == pg.QUIT: return
+            if event.type == pg.QUIT:
+                return
+            if event.type == pg.KEYDOWN:
+                if event.key == 32:
+                    beem = Shot(kkt)
 
         kkt.update(scr)
 
         bkb.update(scr)
+
+        if beem != None:
+            beem.update(scr)
 
         if kkt.rct.colliderect(bkb.rct):
             return
