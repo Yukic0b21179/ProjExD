@@ -97,11 +97,11 @@ class Shot:
 def main():
     clock = pg.time.Clock()
 
-    scr = Screen("逃げろ！こうかとん", (1600,900), "fig/pg_bg.jpg")
+    scr = Screen("戦え！こうかとん", (1600,900), "fig/pg_bg.jpg")
 
     kkt = Bird("fig/6.png", 2.0, (900, 400))
 
-    bkb = Bomb((255,0,0), 10, (+1,+1), scr)
+    bkb = Bomb((int(random.uniform(0,255)),int(random.uniform(0,255)),int(random.uniform(0,255))), 10, (+1,+1), scr)
 
     # beem = Shot(kkt)
     beem = None
