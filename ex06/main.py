@@ -1,6 +1,7 @@
 import pygame as pg
 import sys
 import random
+import tkinter as tk
 
 
 class Screen:
@@ -73,13 +74,25 @@ class Bomb:
 
 
 def main():
+    bgn = int(pg.time.get_ticks())
+    global counter,fcnt
+
     clock = pg.time.Clock()
-    scr = Screen("逃げろ！こうかとん", (1600, 900), "fig/pg_bg.jpg")
+    scr = Screen("fighting！こうかとん", (1600, 900), "fig/pg_bg.jpg")
     kkt = Bird("fig/6.png", 2.0, (900, 400))
     bkd = Bomb((255,0,0), 10, (+1,+1), scr)
+    old = 0
+    fonto = pg.font.Font("C:\WINDOWS\FONTS\BIZ-UDMINCHOM.TTC", 80)
 
     while True:
         scr.blit()
+        fcnt += 1
+
+        sec = int(100-(pg.time.get_ticks()-bgn)/1000)
+        if sec == 0:
+                clear()
+        txt = fonto.render(f"制限時間{sec}", True, (255,0,0))
+        scr.sfc.blit(txt, (200, 100))
 
         # 練習2
         for event in pg.event.get():
@@ -88,10 +101,51 @@ def main():
         kkt.update(scr)
         bkd.update(scr)
         if kkt.rct.colliderect(bkd.rct):
-            return
+            break
 
         pg.display.update()
         clock.tick(1000)
+
+
+
+def Continue():
+    global root
+    root = tk.Tk()                                                              #gameover画面(y/n)yの場合コンティニュー、nの場合ゲームを終了
+    root.geometry("220x100")
+    root.title("GameOver")
+    label = tk.Label(root, text="continue?", font = ("Times New Roman", 40))
+    label.place(y = 90)
+    label.pack()
+    btn1 = tk.Button(root, text = "Yes", command = reset)
+    btn1.place(x = 63, y = 60)
+    btn2 = tk.Button(root, text = "No", command = exit)
+    btn2.place(x = 126, y = 60)
+    root.mainloop()
+
+
+def clear():
+    global root
+    root = tk.Tk()
+    root.geometry("400x110")
+    root.title("ゲームクリア！")
+    label = tk.Label(root, text="Congratulations!", font = ("Times New Roman", 40))
+    label.place(y = 90)
+    label.pack()
+    btn = tk.Button(root, text = "おめでとう！", command = exit)
+    btn.place(x = 150, y = 65)
+    root.mainloop()
+
+
+def reset():     #鳥のカウントとゲームオーバー画面の非表示
+    global root
+    root.destroy()
+    pg.init()
+    main()
+
+
+def exit():
+    pg.quit()
+    sys.exit()
 
 
 # 練習7
@@ -107,7 +161,13 @@ def check_bound(rct, scr_rct):
 
 
 if __name__ == "__main__":
+    cnt = 0
+    fcnt = 0
+    tmr = 100
+    clock = pg.time.Clock()
+    crashed = False
+    counter = 100
     pg.init()
     main()
-    pg.quit()
-    sys.exit()
+    while True:
+        Continue()
