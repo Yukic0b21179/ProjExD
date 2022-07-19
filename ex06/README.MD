@@ -1,5 +1,5 @@
 # 第6回
-## fighting！こうかとん（ex05/fight_kokaton.py）
+## fighting！こうかとん（ex06/fight_kokaton.py）←戦う要素はない模様
 ### ゲーム概要
 - ex05/fight_kokaton.pyを実行すると，1600x900のスクリーンに草原が描画され，
 こうかとんを移動させ飛び回る爆弾から逃げるゲーム
