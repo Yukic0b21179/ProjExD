@@ -75,18 +75,17 @@ class Bomb:
 
 def main():
     bgn = int(pg.time.get_ticks())
-    global counter,fcnt
+    global counter,cnt
 
     clock = pg.time.Clock()
     scr = Screen("fighting！こうかとん", (1600, 900), "fig/pg_bg.jpg")
-    kkt = Bird("fig/6.png", 2.0, (900, 400))
+    kkt = Bird(f"fig/{cnt}.png", 2.0, (900, 400))
     bkd = Bomb((255,0,0), 10, (+1,+1), scr)
     old = 0
     fonto = pg.font.Font("C:\WINDOWS\FONTS\BIZ-UDMINCHOM.TTC", 80)
 
     while True:
         scr.blit()
-        fcnt += 1
 
         sec = int(100-(pg.time.get_ticks()-bgn)/1000)
         if sec == 0:
@@ -137,7 +136,10 @@ def clear():
 
 
 def reset():     #鳥のカウントとゲームオーバー画面の非表示
-    global root
+    global root,cnt
+    cnt += 1
+    if cnt == 9:
+        cnt = 0
     root.destroy()
     pg.init()
     main()
