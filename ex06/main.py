@@ -87,11 +87,11 @@ def main():
     while True:
         scr.blit()
 
-        sec = int(100-(pg.time.get_ticks()-bgn)/1000)
+        sec = int(100-(pg.time.get_ticks()-bgn)/1000)           #秒数の計算
         if sec == 0:
                 clear()
-        txt = fonto.render(f"制限時間{sec}", True, (255,0,0))
-        scr.sfc.blit(txt, (200, 100))
+        txt = fonto.render(f"制限時間{sec}", True, (255,0,0))   #こうかとんの画像変更
+        scr.sfc.blit(txt, (200, 100))                           #制限時間のブリット
 
         # 練習2
         for event in pg.event.get():
@@ -122,7 +122,7 @@ def Continue():
     root.mainloop()
 
 
-def clear():
+def clear():                                                                            #ゲームクリアしたときの処理
     global root
     root = tk.Tk()
     root.geometry("400x110")
@@ -135,7 +135,7 @@ def clear():
     root.mainloop()
 
 
-def reset():     #鳥のカウントとゲームオーバー画面の非表示
+def reset():     #鳥のカウントとゲームオーバー画面の非表示　こうかとんの位置リセット　画像チェンジ
     global root,cnt
     cnt += 1
     if cnt == 9:
@@ -145,7 +145,7 @@ def reset():     #鳥のカウントとゲームオーバー画面の非表示
     main()
 
 
-def exit():
+def exit():     #終了
     pg.quit()
     sys.exit()
 
@@ -166,9 +166,6 @@ if __name__ == "__main__":
     cnt = 0
     fcnt = 0
     tmr = 100
-    clock = pg.time.Clock()
-    crashed = False
-    counter = 100
     pg.init()
     main()
     while True:
